@@ -2,7 +2,8 @@
     "name": "flycorp/rastreio-correios",
     "description": "A helper to get the current git version of the application",
     "require": {
-        "illuminate/support": ">=4"
+        "illuminate/support": ">=4",
+        "minimum-stability": "dev"
     },
     "suggest": {
         "symfony/process": "Used rather than `shell_exec` if available (>=3.3)."
