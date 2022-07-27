@@ -1,6 +1,6 @@
 <?php
 
-namespace FlyCorp\CorreiosRastreio;
+namespace FlyCorp\RastreioCorreios;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\RuntimeException;

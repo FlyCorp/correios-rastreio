@@ -1,5 +1,5 @@
 <?php
-namespace FlyCorp\CorreiosRastreio;
+namespace FlyCorp\RastreioCorreios;
 
 use Illuminate\Support\ServiceProvider;
 

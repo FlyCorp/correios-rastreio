@@ -1,6 +1,7 @@
 {
     "name": "flycorp/rastreio-correios",
     "description": "A helper to get the current git version of the application",
+    "minimum-stability": "dev",
     "require": {
         "illuminate/support": ">=4"
         
