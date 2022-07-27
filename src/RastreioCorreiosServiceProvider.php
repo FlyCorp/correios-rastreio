@@ -5,7 +5,7 @@ use Illuminate\Support\ServiceProvider;
 
 class RastreioCorreiosServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register() 
     {
     }
 
