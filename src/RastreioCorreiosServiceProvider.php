@@ -15,4 +15,7 @@ class RastreioCorreiosServiceProvider extends ServiceProvider
         $this->package('flycorp/rastreio-correios', null, __DIR__ . '/../resources');
         
     }
+    public function package(){
+        
+    }
 }
