@@ -26,8 +26,8 @@ class RastreioCorreiosHelper
         
         $ArrayTBase64 = null;
 
-        $ArrayTBase64(function() use ($credentials){
-            
+        $ArrayTBase64(function($data) use ($credentials){
+            dd($data);
             foreach ($credentials  as $key => $value) {
          
                 $value.$value;
