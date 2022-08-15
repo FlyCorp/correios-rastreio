@@ -36,7 +36,7 @@ class RastreioCorreiosHelper
 
             $credentials = $value;
 
-            return base64_encode($value);
+            dd(base64_encode($value));
 
         };
 
