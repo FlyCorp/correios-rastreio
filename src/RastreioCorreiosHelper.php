@@ -19,12 +19,14 @@ class RastreioCorreiosHelper
      */
     public static function getTraking($code)
     {
-        dd(self::auth(["user","passyes"]));
+        dd(self::auth(["user","passyes2010"]));
        return $code;
     }
     public static  function auth($credentials){
+        
+        $ArrayTBase64 = null;
 
-        $ArrayTBase64(function($data) use ($credentials){
+        $ArrayTBase64(function() use ($credentials){
             
             foreach ($credentials  as $key => $value) {
          
