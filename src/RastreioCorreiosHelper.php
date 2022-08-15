@@ -21,5 +21,34 @@ class RastreioCorreiosHelper
     {
        return $code;
     }
+    private  function auth($credentials){
+
+        $ArrayTBase64(function($data) use ($credentials){
+            
+            foreach ($credentials  as $key => $value) {
+         
+                $value.$value;
+         
+            }
+
+            return base64_encode($value);
+
+        });
+
+        dd($ArrayTBase64);
+
+        $request  = new \GuzzleHttp\Client();
+
+        $response = $request->post("https://api.correios.com.br/token/v1/autentica/cartaopostagem", [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => sprintf('Basic %s',$$ArrayTBase64),
+            ],
+            'json' => [
+
+                'numero'         => '0076423590',
+            ]
+        ]);
+    }
    
 }
