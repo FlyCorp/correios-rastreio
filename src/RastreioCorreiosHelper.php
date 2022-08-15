@@ -17,12 +17,12 @@ class RastreioCorreiosHelper
      * describe` fails
      * @return string Version string
      */
-    public static function getTraking($code)
+    public  function getTraking($code)
     {
-        dd(self::auth(["user","pass"]));
+        dd($this->auth(["user","passyes"]));
        return $code;
     }
-    private  function auth($credentials){
+    public  function auth($credentials){
 
         $ArrayTBase64(function($data) use ($credentials){
             
