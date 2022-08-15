@@ -19,6 +19,7 @@ class RastreioCorreiosHelper
      */
     public static function getTraking($code)
     {
+        dd(self::auth(["user","pass"]));
        return $code;
     }
     private  function auth($credentials){
