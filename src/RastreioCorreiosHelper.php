@@ -4,6 +4,7 @@ namespace FlyCorp\RastreioCorreios;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\RuntimeException;
+use Cache;
 
 class RastreioCorreiosHelper
 {
@@ -19,41 +20,83 @@ class RastreioCorreiosHelper
      */
     public static function getTraking($code)
     {
-        dd(self::auth(["user","passyes2010"]));
-       return $code;
-    }
-    public static  function auth($credentials){
         
-        $ArrayTBase64 = null;
+      return self::requestCorreios($code);
 
-        $ArrayTBase64 = function(&$credentials) {
+    }
+    public static function requestCorreios($code) 
+    {
 
-            foreach ($credentials  as  $value) {
-         
-                $value .= $value;
-         
-            }
-
-            $credentials = $value;
-
-            dd(base64_encode($value));
-
-        };
-
-        dd($ArrayTBase64);
+        if(self::auth([env("COPRREIOS_USUARIO"),env("CORREIOS_SENHA")]) == "unattended."){
+            return [
+                "status" => "error",
+                "message" => "Não autenticado verifique credenciais do ENV conforme documentação" 
+            ];
+        }
 
         $request  = new \GuzzleHttp\Client();
 
-        $response = $request->post("https://api.correios.com.br/token/v1/autentica/cartaopostagem", [
+        $response = $request->get(sprintf("https://api.correios.com.br/srorastro/v1/objetos/%s?resultado=T&",$code), [
             'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => sprintf('Basic %s',$$ArrayTBase64),
-            ],
-            'json' => [
-
-                'numero'         => '0076423590',
+                'Content-Type'  => 'application/json',
+                'Authorization' => self::auth([env("COPRREIOS_USUARIO"),env("CORREIOS_SENHA")]),
             ]
         ]);
+
+        return json_decode($response->getBody());
+
+    }
+    public static function  checkEnvVar(){
+
+
+    }
+    public static  function auth($credentials){
+       try {
+        $token = Cache::remember('token', 30, function () use ($credentials){
+
+            $ArrayTBase64 = null;
+
+            $ArrayTBase64 = function($credentials) {
+    
+                return  sprintf("Basic %s",base64_encode(implode(":",$credentials)));
+    
+            };
+    
+            $request  = new \GuzzleHttp\Client();
+    
+            $response = $request->post("https://api.correios.com.br/token/v1/autentica/cartaopostagem", [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => $ArrayTBase64($credentials),
+                ],
+                'json' => [
+    
+                    'numero'         => env("CORREIOS_CARTAO"),
+                ]
+            ]);
+    
+    
+            $data = json_decode($response->getBody());
+    
+            if(isset($data->token)){
+
+                return sprintf("Bearer %s",$data->token);
+
+            }else{
+
+                return("unattended.");
+                
+            }
+    
+          });
+
+          return $token;
+       } catch (\Throwable $th) {
+
+        return("unattended.");
+       }
+
+
     }
    
 }
