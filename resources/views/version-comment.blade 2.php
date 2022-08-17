@@ -1,1 +1,0 @@
-<!-- {{ \FlyCorp\LaravelGitVersion\GitVersionHelper::getNameAndVersion() }} -->
