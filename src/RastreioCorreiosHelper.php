@@ -27,7 +27,7 @@ class RastreioCorreiosHelper
     public static function requestCorreios($code) 
     {
 
-        if(self::auth([env("COPRREIOS_USUARIO"),env("CORREIOS_SENHA")]) == "unattended."){
+        if(self::auth([env("CORRREIOS_USUARIO"),env("CORREIOS_SENHA")]) == "unattended."){
             return [
                 "status" => "error",
                 "message" => "Não autenticado verifique credenciais do ENV conforme documentação" 
