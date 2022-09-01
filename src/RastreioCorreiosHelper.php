@@ -27,7 +27,7 @@ class RastreioCorreiosHelper
     public static function requestCorreios($code) 
     {
 
-        if(self::auth([env("CORRREIOS_USUARIO"),env("CORREIOS_SENHA")]) == "unattended."){
+        if(self::auth([env("CORREIOS_USUARIO"),env("CORREIOS_SENHA")]) == "unattended."){
             return [
                 "status" => "error",
                 "message" => "Não autenticado verifique credenciais do ENV conforme documentação" 
@@ -39,7 +39,7 @@ class RastreioCorreiosHelper
         $response = $request->get(sprintf("https://api.correios.com.br/srorastro/v1/objetos/%s?resultado=T&",$code), [
             'headers' => [
                 'Content-Type'  => 'application/json',
-                'Authorization' => self::auth([env("COPRREIOS_USUARIO"),env("CORREIOS_SENHA")]),
+                'Authorization' => self::auth([env("CORREIOS_USUARIO"),env("CORREIOS_SENHA")]),
             ]
         ]);
 
